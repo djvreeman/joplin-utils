@@ -3,7 +3,29 @@ Collection of tools for working with [Joplin](https://joplinapp.org/), the open 
 
 
 
-## Other Dependencies
+## Dependencies
+
+### Python
+
+On Mac, you can use Homebrew to install a newer version of Python alongside the system version.
+
+```
+brew install python
+```
+
+You can install Python packages with
+
+```
+pip3 install <package>
+```
+
+They will install into the site-package directory
+
+```
+/usr/local/lib/python3.10/site-packages
+```
+
+### Python modules
 
 These tools make use of other python modules you'll need:
 
@@ -14,9 +36,9 @@ These tools make use of other python modules you'll need:
 Install them with pip:
 
 ```console
-pip install click
-pip install requests
-pip install PyMuPDF
+pip3 install click
+pip3 install requests
+pip3 install PyMuPDF
 ```
 
 ## file-uploader.py
