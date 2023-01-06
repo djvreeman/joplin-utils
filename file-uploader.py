@@ -36,13 +36,6 @@ from joplin import joplinapi
     help="""Specify Tags to add to the note. Comma separated for multiple tags.""",
 )
 @click.option(
-    "-p",
-    "--path",
-    "path",
-    required=False,
-    help="""Specify the folder for monitoring.""",
-)
-@click.option(
     "-f",
     "--file",
     "file",
@@ -72,10 +65,7 @@ from joplin import joplinapi
     show_default=True,
     help="""Create a preview of the first site from an PDF file.""",
 )
-def Main(path, file, notebook, token, url, plain, add_tag, preview):
-    if not os.path.exists(path):
-        print("Path does not exist")
-
+def Main(file, notebook, token, url, plain, add_tag, preview):
     if token is not None:
         joplinapi.SetEndpoint(url, token)
     elif joplinapi.LoadEndpoint() == False:
@@ -99,18 +89,20 @@ def Main(path, file, notebook, token, url, plain, add_tag, preview):
         add_tag = add_tag.replace(", ", ",")
         add_tag = add_tag.split(",")
 
-    WatchFolder(path, file, notebook_id, plain, add_tag, preview)
+    AddFile(file, notebook_id, plain, add_tag, preview)
 
 
-def WatchFolder(path, file, notebook_id, plain, add_tags, preview):
-    file_path = os.path.join(path, file)
+def AddFile(file, notebook_id, plain, add_tags, preview):
+    file_path = file
+    splitpath = os.path.split(file_path)
+    filename = splitpath[1]
     #if file.find(".lock") > 0:
-    f = open(file_path + ".lock", 'w')
+    f = open(file + ".lock", 'w')
     f.close()
 
     print("Add to Joplin: " + file)
     note_id = joplinapi.CreateNoteWithFile(
-        os.path.join(path, file), notebook_id, plain, preview)
+        file, notebook_id, plain, preview)
     if note_id != False:
         if add_tags is not None:
             for tag in add_tags:
