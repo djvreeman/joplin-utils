@@ -71,3 +71,8 @@ python3 file-uploader.py -n "Inbox" -p "/Users/djvreeman/joplin-import" -f "2022
 - `--as-plain` Specify file extensions comma separated for input as text. Example: `.md, .json`
 - `--tag` Specify of comma separated Tags which should be added to the note. Example: `scan, todo`
 - `--preview` Create a preview of the first site from an PDF file.
+
+## joplin-process-email.py
+*Need to write this section yet*
+
+uses `config-example.ini` for loading Joplin and IMAP settings
